@@ -1,0 +1,35 @@
+
+
+#newsticker-demo { 
+width:305px; 
+/* background:#FFFFFF;  */
+padding:1px 1px 0; 
+font-family:Verdana,Arial,Sans-Serif;
+
+margin:20px auto;
+/* border-style:solid;
+border-color:#000000 #000000;
+border-width:1px;
+border-radius: 10px 10px 10px 10px;
+box-shadow: 2px 2px 0 #C2C2C2;
+color: #888888;
+border: 1px solid black; */
+}
+
+#newsticker-demo a { text-decoration:none; }
+#newsticker-demo img { border: 2px solid #FFFFFF; }
+
+#newsticker-demo .title {
+text-align:center;
+font-size:14px;
+font-weight:bold;
+padding:10px;
+}
+
+.newsticker-jcarousellite { width:300px; padding-top:0px;}
+.newsticker-jcarousellite ul li{ list-style:none; display:block; padding-bottom:0px; margin-bottom:5px; }
+.newsticker-jcarousellite .thumbnail { float:left; width:35px; padding: 9px 10px 0px 0px;}
+.newsticker-jcarousellite .info { float:left; width:240px; padding: 5px;}
+.newsticker-jcarousellite .info span.cat { display: block; font-size:10px; color:#808080; }
+
+.clear { clear: both; }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/security 
+                        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+ 	<security:http pattern="/resources/**" security="none"> </security:http>
+	<security:http pattern="/jsp/resources/**" security="none"> </security:http>
+	<security:http pattern="/jsp/img**" security="none"> </security:http> 
+
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/accessDenied.jsp">
+
+<!-- 		<security:form-login  login-page="/login.jsp"
+			default-target-url="/jsp/home"  authentication-failure-handler-ref="authenticationFailureHandler"  />
+ -->
+ 		<security:form-login  login-page="/login.jsp"
+			default-target-url="/jsp/transport/home" authentication-failure-url="/login.jsp?status=1" />
+ 
+
+		<security:intercept-url pattern="/login.jsp"
+			access="permitAll" />
+
+
+ 		<security:intercept-url pattern="/jsp/transport/home"
+			access="permitAll" />
+ 
+ 		<security:intercept-url pattern="/jsp/carpool/home"
+			access="permitAll" />
+		
+ 		
+		<security:intercept-url pattern="/jsp/printerFriendlyPage"
+			access="permitAll" />
+			
+		<security:intercept-url pattern="/jsp/printAllPassengerList"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/bookCabForUser"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/applyForMonthyPass"
+			access="permitAll" />
+		
+<!-- 		<security:intercept-url pattern="/jsp/getInPlaceSelection"
+			access="permitAll" /> -->
+						
+			
+		<security:intercept-url pattern="/jsp/transportTeam"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/printPassengerList"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/printTransportTeamDetails"
+			access="permitAll" />
+
+
+		<security:intercept-url pattern="/jsp/renderChart"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/allEvents"
+			access="permitAll" />
+
+
+		<security:intercept-url pattern="/jsp/busFareAndPass"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/browse"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/faq"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/carpool/faq.jsp"
+			access="permitAll" />
+		
+		<security:intercept-url pattern="/jsp/upload"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/contactUs"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/userStats"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/ganesh"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/searchPlaces"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/searchMatchingRoutes"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/jsp/androidGetAllRoute"
+			access="permitAll" />
+
+		
+		<security:intercept-url pattern="/jsp/**"
+			access="isAuthenticated()" />
+
+
+		<security:logout logout-url="/j_spring_security_logout" logout-success-url="/login.jsp?logout=success" 
+			invalidate-session="true"  />
+		
+	</security:http> 
+	
+	
+<!-- 	<security:authentication-manager alias="authenticationManager">
+		     
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+			<security:password-encoder hash="md5" />
+		</security:authentication-provider>
+ 	
+	</security:authentication-manager>
+ -->
+ 
+ 	<bean id="ldapAuthenticationProvider" class="com.corporate.transport.authentication.FacebookAuthenticationProvider">
+	</bean>
+ 
+
+	<security:authentication-manager alias="authenticationManager">
+ 		 <security:authentication-provider ref='ldapAuthenticationProvider'/>	
+	</security:authentication-manager>
+	
+
+	<bean id="customUserDetailsService" class="org.krams.service.CustomUserDetailsService">
+	</bean>		
+
+
+
+
+	<!-- THIS BEAN IS CONFIGURED SO THAT WHILE LOGIN FAILURE HAPPENS, WE WILL COME TO KNOW THE EXACT CAUSE OF FAILURE LIKE INACTIVE USER, BAD CREDENTIALS etc by PRINTING MESSAGE  -->
+	
+	<bean id="authenticationFailureHandler"
+	    class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+	    <property name="exceptionMappings">
+	        <props>
+	            <prop key="org.springframework.security.authentication.BadCredentialsException">/jsp/login.jsp?status=1</prop>
+	            <prop key="org.springframework.security.authentication.CredentialsExpiredException">/login.jsp?status=2</prop>
+	            <prop key="org.springframework.security.authentication.LockedException">/login.jsp?status=3</prop>
+	            <prop key="org.springframework.security.authentication.DisabledException">/login.jsp?status=4</prop>
+	            <prop key="org.springframework.security.facebook.LDAPConnectivityException">/jsp/login.jsp?status=5</prop>
+	            
+	        </props>
+	    </property>
+	</bean>	
+</beans>

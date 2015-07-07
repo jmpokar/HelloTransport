@@ -1,0 +1,21 @@
+/* HTML TAGS */
+
+
+
+
+/* IDs */
+
+
+#container fieldset
+{
+	display: block;
+	margin: 0 0 3em 0;
+	border: 0 solid #FFFFFF;
+	border-top: 1px solid #848484;
+	border-left: 1px solid #848484;
+	border-bottom: 1px solid #848484;
+	border-right: 1px solid #848484;
+	
+}
+
+
